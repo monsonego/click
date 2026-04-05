@@ -229,6 +229,8 @@ Finally, implement {meth}`~ShellComplete.format_completion`. This is called to f
 
 The `type` value is usually `plain`, but it can be another value that the completion script can switch on. For example,
 `file` or `dir` can tell the shell to handle path completion, since the shell is better at that than Click.
+That shell-specific handling is what allows built-in path completions to display shortened entries
+while still inserting the full completion value.
 
 ```python
 class MyshComplete(ShellComplete):
