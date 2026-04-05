@@ -719,6 +719,7 @@ def test_open_url_windows_locate_quotes_path(monkeypatch):
         calls.append(args)
         return 0
 
+    monkeypatch.setattr(click._termui_impl.sys, "platform", "win32")
     monkeypatch.setattr(click._termui_impl, "WIN", True)
     monkeypatch.setattr(click._termui_impl, "CYGWIN", False)
     monkeypatch.setattr("subprocess.call", fake_call)
@@ -728,4 +729,6 @@ def test_open_url_windows_locate_quotes_path(monkeypatch):
     )
 
     assert rv == 0
-    assert calls == [["explorer", '/select,"C:\\Users\\Public\\click demo\\example.txt"']]
+    assert calls == [
+        ["explorer", '/select,"C:\\Users\\Public\\click demo\\example.txt"']
+    ]
